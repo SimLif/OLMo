@@ -48,6 +48,12 @@ class OLMoForCausalLM(PreTrainedModel, GenerationMixin):
     _no_split_modules = ["OLMoBlock"]
     _supports_flash_attn_2 = True
     _supports_sdpa = True
+
+    # transformers 5.x compatibility patches
+    all_tied_weights_keys = {}
+
+    def tie_weights(self, **kwargs):
+        pass
     supports_gradient_checkpointing = True
 
     def __init__(self, config: OLMoConfig, model: Optional[OLMo] = None, init_params: bool = False):
