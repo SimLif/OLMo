@@ -49,11 +49,8 @@ class OLMoForCausalLM(PreTrainedModel, GenerationMixin):
     _supports_flash_attn_2 = True
     _supports_sdpa = True
 
-    # transformers 5.x compatibility patches
+    # transformers 5.x compatibility
     all_tied_weights_keys = {}
-
-    def tie_weights(self, **kwargs):
-        pass
     supports_gradient_checkpointing = True
 
     def __init__(self, config: OLMoConfig, model: Optional[OLMo] = None, init_params: bool = False):
@@ -193,7 +190,7 @@ class OLMoForCausalLM(PreTrainedModel, GenerationMixin):
         else:
             self.model.transformer.ff_out = value
 
-    def tie_weights(self):
+    def tie_weights(self, **kwargs):
         """
         This function is intentionally left as a no-op.
 
