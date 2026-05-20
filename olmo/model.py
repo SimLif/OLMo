@@ -1305,7 +1305,7 @@ class OLMo(nn.Module):
         if past_key_values is None:
             past_length = 0
         else:
-            past_length = past_key_values[0][0].size(-2)
+            past_length = past_key_values[0][0].size(-2) if past_key_values is not None and past_key_values[0] is not None else 0
 
         max_doc_len: Optional[int] = None
         cu_doc_lens: Optional[torch.Tensor] = None
