@@ -101,7 +101,7 @@ class OLMoForCausalLM(PreTrainedModel, GenerationMixin):
         ] = None,  # This is a hack mitigation of an issue in transformers `4.39.x` https://github.com/huggingface/transformers/issues/29426
     ) -> Union[Tuple, CausalLMOutputWithPast]:
         if use_cache is None:
-            use_cache = self.config.use_cache
+            use_cache = getattr(self.config, 'use_cache', False)
 
         if output_attentions:
             raise ValueError("output_attentions is not yet supported in OLMo")
